@@ -9,6 +9,7 @@
 #include <math.h>
 
 #include "Sphere.hpp"
+#include "Plane.hpp"
 #include "Hitablelist.hpp"
 #include "Camera.hpp"
 #include "SimpleRand.hpp"
@@ -127,7 +128,8 @@ class Image
 			//list[3] = new Sphere(Vec3<float>(0.0, 0.0, -1.0), 0.5, new Dieletric(1.5));
 			list[3] = new Sphere(Vec3<float>(0.0, 0.0, -1.0), 0.5, new Dieletric(1.5));
 			//list[4] = new Sphere(Vec3<float>(0.0, 0.0, -1.0), -0.495, new Dieletric(1.5));
-			list[4] = new Sphere(Vec3<float>(-1.0, 0.0, -5.0), 3.5, new Lambertian(Vec3<float>(0.6, 0.4, 0.5)));
+			list[4] = new Plane(Vec3<float>(-1.0, 1.0, -5.0), Vec3<float>(1.0, 0.0, -2.0), new Lambertian(Vec3<float>(1.0, 1.0, 1.0)));
+			//list[4] = new Sphere(Vec3<float>(-1.0, 0.0, -5.0), 3.5, new Lambertian(Vec3<float>(0.6, 0.4, 0.5)));
 			//list[5] = new Sphere(Vec3<float>(-1.0, 0.0, -1.0), 0.5, new Dieletric(10.5));
 
 			Hitable * world = new Hitable_list(list, 5);
