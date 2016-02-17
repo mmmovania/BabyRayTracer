@@ -128,7 +128,7 @@ class Image
 			list[1] = new Sphere(Vec3<float>(1, -100.5, -1.0), 100, new Lambertian(Vec3<float>(0.1, 0.4, 0.3)));
 			list[2] = new Sphere(Vec3<float>(1.5, 0.0, -1.0), 0.5, new Metal(Vec3<float>(0.8, 0.6, 0.2),1.0));
 			//list[3] = new Sphere(Vec3<float>(0.0, 0.0, -1.0), 0.5, new Dieletric(1.5));
-			list[3] = new Box(Vec3<float>(-0.5, -0.5, 1.0), Vec3<float>(0.0, 0.0, 0.0), new Lambertian(Vec3<float>(0.1, 0.2, 0.5)));
+			list[3] = new Box(Vec3<float>(0.0, -0.5, -1.5), Vec3<float>(0.5, 0.0, -1.0), new Dieletric(1.5));
 			//list[4] = new Sphere(Vec3<float>(0.0, 0.0, -1.0), -0.495, new Dieletric(1.5));
 			//list[4] = new Plane(Vec3<float>(-4.0, 5.0, -2.0), Vec3<float>(4.0, -1.0, -2.0), new Dieletric(1.5));
 			//list[4] = new Plane(Vec3<float>(0.0, 0.0, -4.0), Vec3<float>(0.0, 1.0, 1.0), new Dieletric(1.5));
@@ -138,7 +138,7 @@ class Image
 			Hitable * world = new Hitable_list(list, 4);
 			//Hitable *world = random_scene();
 
-			Vec3<float> lookfrom(0.2, 0.0, 2.0), lookat(0.0, 0.0, -1.0);
+			Vec3<float> lookfrom(2.0, 0.0, 1.0), lookat(0.0, 0.0, -1.0);
 			float dist_to_focus = (lookfrom - lookat).length();
 			float aperture = 2.0;
 

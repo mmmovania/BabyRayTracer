@@ -1,6 +1,7 @@
 #ifndef BOX_
 #define BOX_
 
+#include <stdlib.h>
 #include "Vec3.hpp"
 #include "Ray.hpp"
 #include "Hitable.hpp"
@@ -71,23 +72,26 @@ bool Box::hit(Ray<float> & r, float t_min, float t_max, hit_record & rec) const 
 	rec.t = tmin;
 	rec.p = r.point_at_parameter(tmin);
 
-	if (rec.p.z() == bounds[0].z())
-		normal = Vec3<float>(0, 1, 0);
-	else if (rec.p.z() == bounds[1].z())
-		normal = Vec3<float>(0, -1, 0);
-	else if (rec.p.x() == bounds[1].x())
-		normal = Vec3<float>(1, 0, 0);
-	else if (rec.p.x() == bounds[0].x())
-		normal = Vec3<float>(-1, 0, 0);
-	else if (rec.p.y() == bounds[1].y())
-		normal = Vec3<float>(0, 0, 1);
-	else if (rec.p.y() == bounds[0].y())
+	float EPSI = 0.01;
+
+	if (abs(rec.p.z() - bounds[0].z()) <= EPSI)
 		normal = Vec3<float>(0, 0, -1);
+	else if (abs(rec.p.z() - bounds[1].z()) <= EPSI)
+		normal = Vec3<float>(0, 0, 1);
+	else if (abs(rec.p.x() - bounds[1].x()) <= EPSI)
+		normal = Vec3<float>(1, 0, 0);
+	else if (abs(rec.p.x() - bounds[0].x()) <= EPSI)
+		normal = Vec3<float>(-1, 0, 0);
+	else if (abs(rec.p.y() - bounds[1].y()) <= EPSI)
+		normal = Vec3<float>(0, 1, 0);
+	else if (abs(rec.p.y() - bounds[0].y()) <= EPSI)
+		normal = Vec3<float>(0, -1, 0);
 
 	rec.normal = normal;
 	rec.mat_ptr = material;
 
-	return ((tmin < t_max) && (tmax > t_min));}
+	return ((tmin < t_max) && (tmax > t_min));
+}
 
 #endif
 
